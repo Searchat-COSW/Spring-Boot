@@ -1,8 +1,10 @@
 package edu.eci.cosw.searchat.searchatapi.model;
 
+/**
+ * Created by Desarrollo on 10/02/2018.
+ */
 public class User
 {
-
 
     private String email;
 
@@ -30,9 +32,6 @@ public class User
         this.image = image;
         this.username = username;
     }
-
-
-
 
     public String getEmail()
     {
@@ -84,18 +83,23 @@ public class User
         this.username = username;
     }
 
-    @Override
-    public String toString()
-    {
-        return "User{ email='" + email + '\'' + ", password='" + password + '\'' + ", firstname='"
-                + firstname + '\'' + ", image="+image + '\'' +'}';
-    }
-
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", username='" + username + '\'' +
+                ", image='" + image + '\'' +
+                '}';
     }
 }

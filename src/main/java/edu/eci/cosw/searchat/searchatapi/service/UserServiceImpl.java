@@ -9,11 +9,11 @@ import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl  implements UserService
 {
-
     private List<User> users = new ArrayList<>();
 
     @PostConstruct
@@ -22,38 +22,25 @@ public class UserServiceImpl  implements UserService
         users.add( new User( "xyz","test@mail.com", "password", "Andres", "Perez", "https://ams.educause.edu/eweb/upload/60283746.jpg" ) );
     }
 
-
     @Override
     public User getUser( String username )
     {
-        User ans = null;
-        for (int i =0;i<users.size() ;i++){
-            if(users.get(i).getUsername().equals(username)){
-                ans=users.get(i);
-            }
-        }
+        Optional<User> found = users.stream().filter(h-> h.getUsername().equals(username)).findAny();
+        User ans = found.isPresent()?found.get():null;
         return ans;
     }
 
     @Override
-    public User createUser( User user ) throws ServletException
-    {
-
-        if(yaEstaRegistrado(user.getUsername())){
-            throw new ServletException("El username ya se encuentra registrado en la base de datos");
+    public boolean createUser( User user ) throws ServletException {
+        if (users.stream().anyMatch(h->h.getUsername().equals(user.getUsername()))){
+            throw new ServletException ("Username already exist");
         }
-        users.add(user);
-        return user;
+        return users.add(user);
     }
 
-    private boolean yaEstaRegistrado(String username) {
-        boolean ans = false;
-        for (int i =0;i<users.size() && !ans ;i++){
-            ans=users.get(i).getUsername().equals(username);
-        }
-        return ans;
+    @Override
+    public List<User> getUsers() {
+        return users;
     }
-
-
 
 }
