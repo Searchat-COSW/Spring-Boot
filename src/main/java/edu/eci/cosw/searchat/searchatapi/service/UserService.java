@@ -1,5 +1,6 @@
 package edu.eci.cosw.searchat.searchatapi.service;
 
+import edu.eci.cosw.searchat.searchatapi.model.ProfileInformation;
 import edu.eci.cosw.searchat.searchatapi.model.User;
 
 import javax.servlet.ServletException;
@@ -15,5 +16,7 @@ public interface UserService {
     List<User> getUsers() ;
 
     User getUser( String username );
+
+    boolean updateProfileInformation(String username, ProfileInformation profile)throws ServletException;
 
 }

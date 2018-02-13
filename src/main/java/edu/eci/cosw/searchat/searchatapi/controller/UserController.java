@@ -1,6 +1,7 @@
 package edu.eci.cosw.searchat.searchatapi.controller;
 
 
+import edu.eci.cosw.searchat.searchatapi.model.ProfileInformation;
 import edu.eci.cosw.searchat.searchatapi.model.User;
 import edu.eci.cosw.searchat.searchatapi.service.UserService;
 import io.jsonwebtoken.Jwts;
@@ -93,6 +94,16 @@ public class UserController {
             return new ResponseEntity<>(userService.createUser(user), HttpStatus.ACCEPTED);
         }
         catch (ServletException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @CrossOrigin
+    @RequestMapping( value = "/{username}",method = RequestMethod.POST)
+    public ResponseEntity<?> updateProfileInformation(@PathVariable String username, @RequestBody ProfileInformation profile){
+        try{
+            return new ResponseEntity<>(userService.updateProfileInformation(username, profile), HttpStatus.ACCEPTED);
+        }catch(ServletException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
         }
     }

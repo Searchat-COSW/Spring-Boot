@@ -1,6 +1,7 @@
 package edu.eci.cosw.searchat.searchatapi.service;
 
 
+import edu.eci.cosw.searchat.searchatapi.model.ProfileInformation;
 import edu.eci.cosw.searchat.searchatapi.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,14 @@ public class UserServiceImpl  implements UserService
     public List<User> getUsers() {
         return users;
     }
+
+	@Override
+	public boolean updateProfileInformation(String username, ProfileInformation profile) throws ServletException {
+        User userUpdate = getUser(username);
+        if(userUpdate==null){
+            throw new ServletException("Information profile can't update");
+        }userUpdate.setProfileInformation(profile);
+        return true;
+	}
 
 }
