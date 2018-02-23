@@ -18,6 +18,8 @@ public class User
 
     private String image;
 
+    private ProfileInformation profileInformation;
+
 
     public User()
     {
@@ -102,4 +104,18 @@ public class User
                 ", image='" + image + '\'' +
                 '}';
     }
+
+	/**
+	 * @return the profileInformation
+	 */
+	public ProfileInformation getProfileInformation() {
+		return profileInformation;
+	}
+
+	/**
+	 * @param profileInformation the profileInformation to set
+	 */
+	public void setProfileInformation(ProfileInformation profileInformation) {
+		this.profileInformation = profileInformation;
+	}
 }
