@@ -37,9 +37,10 @@ public class ActivityController {
         return new ResponseEntity<>(activityService.getActivity(name), HttpStatus.ACCEPTED);
     }
     
-    @RequestMapping( value = "/items", method = RequestMethod.GET )
-    public ResponseEntity<?> getActivities () {
-        return new ResponseEntity<>(activityService.getActivities(), HttpStatus.ACCEPTED);
+
+    @RequestMapping( value = "/location/{location}", method = RequestMethod.GET )
+    public ResponseEntity<?> getActivitiesByLocation (@PathVariable String location) {
+        return new ResponseEntity<>(activityService.getActivitiesByLocation(location), HttpStatus.ACCEPTED);
     }
     
     @RequestMapping( value = "/item", method = RequestMethod.POST )

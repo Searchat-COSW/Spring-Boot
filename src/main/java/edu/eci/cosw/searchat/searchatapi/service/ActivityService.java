@@ -15,6 +15,8 @@ import javax.servlet.ServletException;
  */
 public interface ActivityService {
     boolean createActivity(Activity activity) throws ServletException;
-    List<Activity> getActivities();
+
+    List<Activity> getActivitiesByLocation(String location);
+
     Activity getActivity(String activityName);
 }

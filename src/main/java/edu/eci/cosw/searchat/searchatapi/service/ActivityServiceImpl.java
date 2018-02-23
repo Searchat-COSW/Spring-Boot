@@ -13,6 +13,7 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import org.springframework.stereotype.Service;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -41,8 +42,8 @@ public class ActivityServiceImpl implements ActivityService{
     }
 
     @Override
-    public List<Activity> getActivities() {
-        return activities;
+    public List<Activity> getActivitiesByLocation(String location) {
+        return activities.stream().filter(h-> h.getLocation().equals(location)).collect(Collectors.toList());
     }
 
     @Override
