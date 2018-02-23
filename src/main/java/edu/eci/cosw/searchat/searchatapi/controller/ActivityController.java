@@ -46,8 +46,9 @@ public class ActivityController {
     public ResponseEntity<?> getActivitiesByLocation (@PathVariable String location) {
         return new ResponseEntity<>(activityService.getActivitiesByLocation(location), HttpStatus.ACCEPTED);
     }
+    
     @CrossOrigin
-    @RequestMapping( value = "/item", method = RequestMethod.POST )
+    @RequestMapping( value = "/create", method = RequestMethod.POST )
     public ResponseEntity<?> createActivity (@RequestBody Activity activity) {
         try{
             return new ResponseEntity<>(activityService.createActivity(activity), HttpStatus.ACCEPTED);
@@ -56,6 +57,7 @@ public class ActivityController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
         }
     }
+    
     @CrossOrigin
     @RequestMapping( value = "/join/{activityName}", method = RequestMethod.POST )
     public ResponseEntity<?> joinActivity(@PathVariable String activityName,@RequestBody String username) {
