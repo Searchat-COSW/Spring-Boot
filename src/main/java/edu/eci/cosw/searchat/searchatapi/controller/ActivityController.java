@@ -8,6 +8,7 @@ package edu.eci.cosw.searchat.searchatapi.controller;
 import edu.eci.cosw.searchat.searchatapi.model.Activity;
 import edu.eci.cosw.searchat.searchatapi.model.User;
 import edu.eci.cosw.searchat.searchatapi.service.ActivityService;
+import edu.eci.cosw.searchat.searchatapi.service.UserService;
 import javax.servlet.ServletException;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +32,21 @@ public class ActivityController {
     @Autowired
     private ActivityService activityService;
     
+    @Autowired
+    private UserService userService;
+    
     @CrossOrigin
     @RequestMapping( value = "/{name}", method = RequestMethod.GET )
     public ResponseEntity<?> getActivity(@PathVariable String name){
         return new ResponseEntity<>(activityService.getActivity(name), HttpStatus.ACCEPTED);
     }
     
-
+    @CrossOrigin
     @RequestMapping( value = "/location/{location}", method = RequestMethod.GET )
     public ResponseEntity<?> getActivitiesByLocation (@PathVariable String location) {
         return new ResponseEntity<>(activityService.getActivitiesByLocation(location), HttpStatus.ACCEPTED);
     }
-    
+    @CrossOrigin
     @RequestMapping( value = "/item", method = RequestMethod.POST )
     public ResponseEntity<?> createActivity (@RequestBody Activity activity) {
         try{
@@ -52,4 +56,15 @@ public class ActivityController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
         }
     }
+    @CrossOrigin
+    @RequestMapping( value = "/join/{activityName}", method = RequestMethod.POST )
+    public ResponseEntity<?> joinActivity(@PathVariable String activityName,@RequestBody String username) {
+        try{
+            return new ResponseEntity<>(activityService.joinActivity(activityName,userService.getUser(username)), HttpStatus.ACCEPTED);
+        }
+        catch (ServletException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
+        }
+    }
+    
 }

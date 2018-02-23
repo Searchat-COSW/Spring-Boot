@@ -6,6 +6,7 @@
 package edu.eci.cosw.searchat.searchatapi.service;
 
 import edu.eci.cosw.searchat.searchatapi.model.Activity;
+import edu.eci.cosw.searchat.searchatapi.model.User;
 import java.util.List;
 import javax.servlet.ServletException;
 
@@ -19,4 +20,6 @@ public interface ActivityService {
     List<Activity> getActivitiesByLocation(String location);
 
     Activity getActivity(String activityName);
+    
+    boolean joinActivity(String activityName, User user)throws ServletException;
 }
