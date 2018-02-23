@@ -88,6 +88,12 @@ public class UserController {
     }
 
     @CrossOrigin
+    @RequestMapping( value = "/{username}", method = RequestMethod.GET )
+    public ResponseEntity<?> getUser (@PathVariable String username) {
+        return new ResponseEntity<>(userService.getUser(username),HttpStatus.ACCEPTED);
+    }
+    
+    @CrossOrigin
     @RequestMapping( value = "/item", method = RequestMethod.POST )
     public ResponseEntity<?> createUser (@RequestBody User user) {
         try{
