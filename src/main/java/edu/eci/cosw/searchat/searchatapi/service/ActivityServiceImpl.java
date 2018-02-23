@@ -12,11 +12,13 @@ import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author JuanHerrera
  */
+@Service
 public class ActivityServiceImpl implements ActivityService{
     
     private List<Activity> activities = new ArrayList<>();
