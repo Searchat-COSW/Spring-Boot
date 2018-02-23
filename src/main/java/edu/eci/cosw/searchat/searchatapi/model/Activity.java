@@ -12,6 +12,7 @@ public class Activity{
     private String description;
     private User administrator;
     private String[] languages;
+    private String location;
     private String date;
     private User[] participants;
     private String price;
@@ -19,15 +20,18 @@ public class Activity{
     public Activity() {
     }
 
-    public Activity(String name, String description, User administrator, String[] languages, String date, User[] participants, String price) {
+    public Activity(String name, String description, User administrator, String[] languages, String location, String date, User[] participants, String price) {
         this.name = name;
         this.description = description;
         this.administrator = administrator;
         this.languages = languages;
+        this.location = location;
         this.date = date;
         this.participants = participants;
         this.price = price;
     }
+
+    
     
     public String getName() {
         return name;
@@ -85,16 +89,18 @@ public class Activity{
         this.price = price;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     @Override
     public String toString() {
-        return "Activity{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", administrator=" + administrator +
-                ", languages=" + Arrays.toString(languages) +
-                ", date='" + date + '\'' +
-                ", participants=" + Arrays.toString(participants) +
-                ", price='" + price + '\'' +
-                '}';
+        return "Activity{" + "name=" + name + ", description=" + description + ", administrator=" + administrator + ", languages=" + languages + ", location=" + location + ", date=" + date + ", participants=" + participants + ", price=" + price + '}';
     }
+
+    
 }

@@ -9,10 +9,12 @@ import edu.eci.cosw.searchat.searchatapi.model.Activity;
 import edu.eci.cosw.searchat.searchatapi.model.User;
 import edu.eci.cosw.searchat.searchatapi.service.ActivityService;
 import javax.servlet.ServletException;
+import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +30,12 @@ public class ActivityController {
     
     @Autowired
     private ActivityService activityService;
+    
+    @CrossOrigin
+    @RequestMapping( value = "/{name}", method = RequestMethod.GET )
+    public ResponseEntity<?> getActivity(@PathVariable String name){
+        return new ResponseEntity<>(activityService.getActivity(name), HttpStatus.ACCEPTED);
+    }
     
     @RequestMapping( value = "/items", method = RequestMethod.GET )
     public ResponseEntity<?> getActivities () {

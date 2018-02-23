@@ -28,8 +28,8 @@ public class ActivityServiceImpl implements ActivityService{
         User u = new User("Juan", "juan.c.herrerav@hotmail.com", "Juan", "Juan", "Herrera", "http://notiweb.escuelaing.edu.co/wp-content/uploads/2018/01/JuanCamilo_Swat.jpg");
         String[] l = {"Spanish","English"};
         User[] part = {new User("Jhordy", "jhordy@hotmail.com", "Jhordy", "Jhordy", "Salinas", "http://www.escuelaing.edu.co/uploads/generica/810-2.jpg")};
-        activities.add(new Activity("Climbing Monserrate", "In this activity we'll be going all the way up to Monserrate by foot",u, 
-                l ,"22/02/2018 10:00",part, "40000"));
+        activities.add(new Activity("Climbing_Monserrate", "In this activity we'll be going all the way up to Monserrate by foot",u, 
+                l ,"Bogota","22/02/2018 10:00",part, "40000"));
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ActivityServiceImpl implements ActivityService{
 
     @Override
     public Activity getActivity(String activityName) {
-        Optional<Activity> found = activities.stream().filter(h-> h.getName().equals(activityName)).findAny();
+        Optional<Activity> found = activities.stream().filter(h-> h.getName().equals(activityName)).findFirst();
         Activity ans = found.isPresent()?found.get():null;
         return ans;
     }
