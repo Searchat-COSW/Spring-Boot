@@ -49,7 +49,8 @@ public class UserServiceImpl  implements UserService
         User userUpdate = getUser(username);
         if(userUpdate==null){
             throw new ServletException("Information profile can't update");
-        }userUpdate.setProfileInformation(profile);
+        }
+        userUpdate.setProfileInformation(profile);
         return true;
 	}
 
