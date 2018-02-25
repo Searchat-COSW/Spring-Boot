@@ -27,11 +27,10 @@ public class ActivityServiceImpl implements ActivityService{
     @PostConstruct
     public void populateSampleData(){
         User u = new User("Juan", "juan.c.herrerav@hotmail.com", "Juan", "Juan", "Herrera", "http://notiweb.escuelaing.edu.co/wp-content/uploads/2018/01/JuanCamilo_Swat.jpg");
-        String[] l = {"Spanish","English"};
         List<User> part = new ArrayList<>();
         part.add(new User("Jhordy", "jhordy@hotmail.com", "Jhordy", "Jhordy", "Salinas", "http://www.escuelaing.edu.co/uploads/generica/810-2.jpg"));
         activities.add(new Activity("Climbing_Monserrate", "In this activity we'll be going all the way up to Monserrate by foot",u, 
-                l ,"Bogotá","22/02/2018 10:00",part, "40000"));
+                "Spanish, English" ,"Bogotá","22/02/2018 10:00",part, "40000"));
     }
 
     @Override

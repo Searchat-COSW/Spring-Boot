@@ -13,7 +13,7 @@ public class Activity{
     private String name;
     private String description;
     private User administrator;
-    private String[] languages;
+    private String languages;
     private String location;
     private String date;
     private List<User> participants;
@@ -33,7 +33,7 @@ public class Activity{
      * @param participants
      * @param price 
      */
-    public Activity(String name, String description, User administrator, String[] languages, String location, String date, List<User> participants, String price) {
+    public Activity(String name, String description, User administrator, String languages, String location, String date, List<User> participants, String price) {
         this.name = name;
         this.description = description;
         this.administrator = administrator;
@@ -96,7 +96,7 @@ public class Activity{
      * 
      * @return 
      */
-    public String[] getLanguages() {
+    public String getLanguages() {
         return languages;
     }
 
@@ -104,7 +104,7 @@ public class Activity{
      * 
      * @param languages 
      */
-    public void setLanguages(String[] languages) {
+    public void setLanguages(String languages) {
         this.languages = languages;
     }
 
