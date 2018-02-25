@@ -179,10 +179,10 @@ public class Activity{
     
     public void joinActivity(User user) throws ServletException{
         Boolean tmp = false;
-        for(int i = 0; i < participants.size(); i++){
-            if(participants.get(i).getUsername().equals(user.getUsername())){
+        for(int i = 0; i < participants.size() && !tmp; i++){
+            if(participants.get(i).getUsername().equals(user.getUsername()) || administrator.getUsername().equals(user.getUsername())){
                 tmp = true;
-                break;
+                
             }
         }
         if(!tmp){

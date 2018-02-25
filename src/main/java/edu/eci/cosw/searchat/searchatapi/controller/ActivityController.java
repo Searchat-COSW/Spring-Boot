@@ -50,6 +50,7 @@ public class ActivityController {
     @CrossOrigin
     @RequestMapping( value = "/create", method = RequestMethod.POST )
     public ResponseEntity<?> createActivity (@RequestBody Activity activity) {
+        
         try{
             return new ResponseEntity<>(activityService.createActivity(activity), HttpStatus.ACCEPTED);
         }

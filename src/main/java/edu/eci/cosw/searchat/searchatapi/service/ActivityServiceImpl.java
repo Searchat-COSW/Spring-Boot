@@ -38,6 +38,7 @@ public class ActivityServiceImpl implements ActivityService{
         if (activities.stream().anyMatch(h->h.getName().equals(activity.getName()))){
             throw new ServletException ("Username already exist");
         }
+        
         return activities.add(activity);
     }
 
