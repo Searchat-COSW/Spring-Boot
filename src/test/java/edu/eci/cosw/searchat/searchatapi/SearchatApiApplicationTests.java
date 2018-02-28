@@ -159,5 +159,18 @@ public class SearchatApiApplicationTests {
             }
         }
         
+        @Test
+        public void findActivityByLocation(){
+            User u_tmp = new User("Juan", "juan@prueba.com", "password", "Juan", "Herrera", "http://notiweb.escuelaing.edu.co/wp-content/uploads/2018/01/JuanCamilo_Swat.jpg");
+            Activity act = new Activity("testing", "this is a test", u_tmp, "Spanish, English", "Bogota", "Today", null, "cheap");
+            try{
+                userservice.createUser(u_tmp);
+                activitiservie.createActivity(act);
+                activitiservie.joinActivity("testing", u_tmp);
+                Assert.assertEquals(activitiservie.getActivitiesByLocation("Bogota").get(0),act);
+            }catch(Exception e){
+                
+            }
+        }
      
 }
