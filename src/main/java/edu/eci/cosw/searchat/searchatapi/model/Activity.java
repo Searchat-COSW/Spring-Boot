@@ -19,6 +19,9 @@ public class Activity{
     private List<User> participants;
     private String price;
 
+    /**
+     * 
+     */
     public Activity() {
     }
 
@@ -177,6 +180,11 @@ public class Activity{
         return "Activity{" + "name=" + name + ", description=" + description + ", administrator=" + administrator + ", languages=" + languages + ", location=" + location + ", date=" + date + ", participants=" + participants + ", price=" + price + '}';
     }
     
+    /**
+     * 
+     * @param user
+     * @throws ServletException 
+     */
     public void joinActivity(User user) throws ServletException{
         Boolean tmp = false;
         for(int i = 0; i < participants.size() && !tmp; i++){

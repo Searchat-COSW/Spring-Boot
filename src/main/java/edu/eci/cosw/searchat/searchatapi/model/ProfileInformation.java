@@ -7,8 +7,18 @@ public class ProfileInformation{
     private String aboutYou;
     private String image;
 
+    /**
+     * 
+     */
     public ProfileInformation(){}
 
+    /**
+     * 
+     * @param nationality
+     * @param languages
+     * @param aboutYou
+     * @param image 
+     */
     public ProfileInformation(String nationality, String languages, String aboutYou, String image){
         this.nationality = nationality;
         this.languages = languages;

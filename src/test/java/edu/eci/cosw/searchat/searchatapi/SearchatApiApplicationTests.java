@@ -28,10 +28,10 @@ public class SearchatApiApplicationTests {
         
 	@Test
 	public void CreateAndCheckNewUser() {
-            User tmp = new User("Pipe", "pip@mail.com", "password", "Felipe", "Losada", null);
+            User tmp = new User("Pipeeeee", "pip@mail.com", "password", "Felipe", "Losada", null);
             try{
                 Assert.assertEquals(userservice.createUser(tmp),true);
-                User newUserCheck = userservice.getUser("Pipe");
+                User newUserCheck = userservice.getUser("Pipeeeee");
                 Assert.assertEquals(tmp.getEmail(), newUserCheck.getEmail());
                 Assert.assertEquals(tmp.getFirstname(), newUserCheck.getFirstname());
                 Assert.assertEquals(tmp.getLastname(), newUserCheck.getLastname());
@@ -56,11 +56,12 @@ public class SearchatApiApplicationTests {
 
         @Test
         public void updateProfileInformationUser(){
-            User tmp = new User("Pipe", "pip@mail.com", "password", "Felipe", "Losada", null);
+            User tmp = new User("Felipeee", "pip@mail.com", "password", "Felipe", "Losada", null);
             ProfileInformation tmp_profile = new ProfileInformation("Colombia", "Spanish English German", "This its a prove", "http://e00-marca.uecdn.es/assets/multimedia/imagenes/2018/01/26/15169827142899.jpg");
             try{
-                Assert.assertEquals(userservice.updateProfileInformation("Pipe", tmp_profile), true);
-                User newUserCheck = userservice.getUser("Pipe");
+                userservice.createUser(tmp);
+                Assert.assertEquals(userservice.updateProfileInformation("Felipeee", tmp_profile), true);
+                User newUserCheck = userservice.getUser("Felipeee");
                 Assert.assertEquals(tmp.getProfileInformation().getAboutYou(),newUserCheck.getProfileInformation().getAboutYou());
                 Assert.assertEquals(tmp.getProfileInformation().getImage(),newUserCheck.getProfileInformation().getImage());
                 Assert.assertEquals(tmp.getProfileInformation().getLanguages(),newUserCheck.getProfileInformation().getLanguages());
@@ -72,23 +73,24 @@ public class SearchatApiApplicationTests {
         
         @Test
         public void getAllUser(){
-            User tmp = new User("Pipe", "pip@mail.com", "password", "Felipe", "Losada", null);
-            User tmp2 = new User("Felipe", "fel@mail.com", "password", "Feliipe", "Calderon", null);
-            User userByDefect = new User( "xyz","test@mail.com", "password", "Andres", "Perez", "https://ams.educause.edu/eweb/upload/60283746.jpg" );
+            User tmp = new User("Pipeeee", "pip@mail.com", "password", "Felipe", "Losada", null);
+            User tmp2 = new User("Felipeeee", "fel@mail.com", "password", "Feliipe", "Calderon", null);
             List<User> tmp_users = new ArrayList<>();
-            tmp_users.add(userByDefect);
             tmp_users.add(tmp);
             tmp_users.add(tmp2);
             try{
                 Assert.assertEquals(userservice.createUser(tmp),true);
                 Assert.assertEquals(userservice.createUser(tmp2),true);
                 List<User> newUsersCheck = userservice.getUsers();
-                for(int i = 0; i  < newUsersCheck.size(); i++){
-                    Assert.assertEquals(tmp_users.get(i).getEmail(), newUsersCheck.get(i).getEmail());
-                    Assert.assertEquals(tmp_users.get(i).getFirstname(), newUsersCheck.get(i).getFirstname());
-                    Assert.assertEquals(tmp_users.get(i).getLastname(), newUsersCheck.get(i).getLastname());
-                    Assert.assertEquals(tmp_users.get(i).getPassword(), newUsersCheck.get(i).getPassword());
-                    Assert.assertEquals(tmp_users.get(i).getUsername(), newUsersCheck.get(i).getUsername());
+                //usuarios por defecto
+                int int_defect = 0;
+                for(int i = 5; i  < newUsersCheck.size(); i++){
+                    Assert.assertEquals(tmp_users.get(int_defect).getEmail(), newUsersCheck.get(i).getEmail());
+                    Assert.assertEquals(tmp_users.get(int_defect).getFirstname(), newUsersCheck.get(i).getFirstname());
+                    Assert.assertEquals(tmp_users.get(int_defect).getLastname(), newUsersCheck.get(i).getLastname());
+                    Assert.assertEquals(tmp_users.get(int_defect).getPassword(), newUsersCheck.get(i).getPassword());
+                    Assert.assertEquals(tmp_users.get(int_defect).getUsername(), newUsersCheck.get(i).getUsername());
+                    int_defect++;
                 }
             }catch(ServletException ex){
                 fail("Fail in getAllUser");
@@ -98,12 +100,12 @@ public class SearchatApiApplicationTests {
         
         @Test
         public void createNewActivity(){
-            User tmp = new User("Pipe", "pip@mail.com", "password", "Felipe", "Losada", null);
-            Activity activity_tmp = new Activity("prueba", "its a prove", tmp, "English", "Bogota", null, new ArrayList<User>(), "10");
+            User tmp = new User("Hernan", "pip@mail.com", "password", "Felipe", "Losada", null);
+            Activity activity_tmp = new Activity("pruebaaa", "its a prove", tmp, "English", "Bogota", null, new ArrayList<User>(), "10");
             try{
                 userservice.createUser(tmp);
                 Assert.assertEquals(activitiservie.createActivity(activity_tmp),true);
-                Activity checkActivity = activitiservie.getActivity("prueba");
+                Activity checkActivity = activitiservie.getActivity("pruebaaa");
                 Assert.assertEquals(activity_tmp.getName(), checkActivity.getName());
                 Assert.assertEquals(activity_tmp.getDate(), checkActivity.getDate());
                 Assert.assertEquals(activity_tmp.getDescription(), checkActivity.getDescription());

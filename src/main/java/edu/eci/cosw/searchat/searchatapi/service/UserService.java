@@ -11,12 +11,34 @@ import java.util.List;
  */
 public interface UserService {
 
+    /**
+     * 
+     * @param user
+     * @return
+     * @throws ServletException 
+     */
     boolean createUser(User user) throws ServletException;
     
+    /**
+     * 
+     * @return 
+     */
     List<User> getUsers() ;
 
+    /**
+     * 
+     * @param username
+     * @return 
+     */
     User getUser( String username );
 
+    /**
+     * 
+     * @param username
+     * @param profile
+     * @return
+     * @throws ServletException 
+     */
     boolean updateProfileInformation(String username, ProfileInformation profile)throws ServletException;
 
 }

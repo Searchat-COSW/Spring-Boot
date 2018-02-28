@@ -16,11 +16,34 @@ import javax.servlet.ServletException;
  */
 public interface ActivityService {
     
+    /**
+     * 
+     * @param activity
+     * @return
+     * @throws ServletException 
+     */
     boolean createActivity(Activity activity) throws ServletException;
 
+    /**
+     * 
+     * @param location
+     * @return 
+     */
     List<Activity> getActivitiesByLocation(String location);
 
+    /**
+     * 
+     * @param activityName
+     * @return 
+     */
     Activity getActivity(String activityName);
     
+    /**
+     * 
+     * @param activityName
+     * @param user
+     * @return
+     * @throws ServletException 
+     */
     boolean joinActivity(String activityName, User user)throws ServletException;
 }
