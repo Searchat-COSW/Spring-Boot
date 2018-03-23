@@ -1,11 +1,14 @@
 package edu.eci.cosw.searchat.searchatapi.model;
 
+import java.util.ArrayList;
+import java.sql.Blob;
+
 public class ProfileInformation{
     
     private String nationality;
-    private String languages;
+    private ArrayList<String> languages;
     private String aboutYou;
-    private String image;
+    private Blob image;
 
     /**
      * 
@@ -16,14 +19,12 @@ public class ProfileInformation{
      * 
      * @param nationality
      * @param languages
-     * @param aboutYou
-     * @param image 
+     * @param aboutYou 
      */
-    public ProfileInformation(String nationality, String languages, String aboutYou, String image){
+    public ProfileInformation(String nationality, ArrayList<String> languages, String aboutYou){
         this.nationality = nationality;
         this.languages = languages;
         this.aboutYou = aboutYou;
-        this.image = image;
     }
 
 	/**
@@ -43,14 +44,14 @@ public class ProfileInformation{
 	/**
 	 * @return the languages
 	 */
-	public String getLanguages() {
+	public ArrayList<String> getLanguages() {
 		return languages;
 	}
 
 	/**
 	 * @param languages the languages to set
 	 */
-	public void setLanguages(String languages) {
+	public void setLanguages(ArrayList<String> languages) {
 		this.languages = languages;
 	}
 
@@ -71,14 +72,14 @@ public class ProfileInformation{
 	/**
 	 * @return the image
 	 */
-	public String getImage() {
+	public Blob getImage() {
 		return image;
 	}
 
 	/**
 	 * @param image the image to set
 	 */
-	public void setImage(String image) {
+	public void setImage(Blob image) {
 		this.image = image;
 	}
 

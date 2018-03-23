@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
 import java.util.Date;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  * Created by Desarrollo on 10/02/2018.
@@ -112,6 +113,19 @@ public class UserController {
         }catch(ServletException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
         }
+    }
+    
+    @CrossOrigin
+    @RequestMapping( value = "/{username}/image",method = RequestMethod.POST)
+    public ResponseEntity<?> updateImageProfileInformation(MultipartHttpServletRequest request,@PathVariable String username){
+        try {
+            userService.addIMageProfileInformation(request,username);
+        } catch (Exception e) {
+            return new ResponseEntity<>("{}", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>("{}", HttpStatus.OK);
+    
     }
 }
 

@@ -3,14 +3,23 @@ package edu.eci.cosw.searchat.searchatapi.service;
 
 import edu.eci.cosw.searchat.searchatapi.model.ProfileInformation;
 import edu.eci.cosw.searchat.searchatapi.model.User;
+import java.io.IOException;
+import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sql.rowset.serial.SerialBlob;
+import org.springframework.util.StreamUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Service
 public class UserServiceImpl  implements UserService
@@ -20,7 +29,7 @@ public class UserServiceImpl  implements UserService
     @PostConstruct
     private void populateSampleData()
     {
-        users.add( new User( "xyz","test@mail.com", "password", "Andres", "Perez", "https://ams.educause.edu/eweb/upload/60283746.jpg" ) );
+        users.add( new User( "xyz","test@mail.com", "password", "Andres", "Perez") );
     }
 
     @Override
@@ -53,5 +62,26 @@ public class UserServiceImpl  implements UserService
         userUpdate.setProfileInformation(profile);
         return true;
 	}
+
+    @Override
+    public void addIMageProfileInformation(MultipartHttpServletRequest request, String username) throws ServletException {
+        Iterator<String> itr = request.getFileNames();
+
+        while (itr.hasNext()) {
+            String uploadedFile = itr.next();
+            MultipartFile file = request.getFile(uploadedFile);
+            //obtain the user 
+            User userUpdate = getUser(username);
+            if(userUpdate==null){
+                throw new ServletException("Information profile can't update");
+            }
+           
+            try {
+                userUpdate.setImageProfileInformation(new SerialBlob(StreamUtils.copyToByteArray(file.getInputStream())));
+            } catch (SQLException | IOException ex) {
+                throw new ServletException("Information profile can't update");
+            }
+        }
+    }
 
 }

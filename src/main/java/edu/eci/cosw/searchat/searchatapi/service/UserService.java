@@ -5,6 +5,7 @@ import edu.eci.cosw.searchat.searchatapi.model.User;
 
 import javax.servlet.ServletException;
 import java.util.List;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  * Created by Desarrollo on 10/02/2018.
@@ -40,5 +41,7 @@ public interface UserService {
      * @throws ServletException 
      */
     boolean updateProfileInformation(String username, ProfileInformation profile)throws ServletException;
+    
+    void addIMageProfileInformation(MultipartHttpServletRequest request, String username) throws ServletException;
 
 }
