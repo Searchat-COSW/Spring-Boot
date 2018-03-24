@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  *
  * @author JuanHerrera
  */
-//@Service
+@Service
 public class ActivityServiceImpl implements ActivityService{
     
     private List<Activity> activities = new ArrayList<>();
@@ -38,7 +38,8 @@ public class ActivityServiceImpl implements ActivityService{
         if (activities.stream().anyMatch(h->h.getName().equals(activity.getName()))){
             throw new ServletException ("Username already exist");
         }
-        
+        //System.out.println(activity.toString());
+        //System.out.println("-------------------------------------FIN------------------------------");
         return activities.add(activity);
     }
 

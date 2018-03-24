@@ -119,6 +119,7 @@ public class UserController {
     @RequestMapping( value = "/{username}/image",method = RequestMethod.POST)
     public ResponseEntity<?> updateImageProfileInformation(MultipartHttpServletRequest request,@PathVariable String username){
         try {
+
             userService.addIMageProfileInformation(request,username);
         } catch (Exception e) {
             return new ResponseEntity<>("{}", HttpStatus.INTERNAL_SERVER_ERROR);

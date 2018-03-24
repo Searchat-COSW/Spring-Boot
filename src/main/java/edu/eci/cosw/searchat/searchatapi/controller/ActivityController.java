@@ -52,6 +52,7 @@ public class ActivityController {
     public ResponseEntity<?> createActivity (@RequestBody Activity activity) {
         
         try{
+            //System.out.println("-------------------------------------creando actividad------------------------------");
             return new ResponseEntity<>(activityService.createActivity(activity), HttpStatus.ACCEPTED);
         }
         catch (ServletException e){

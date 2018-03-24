@@ -1,12 +1,15 @@
 package edu.eci.cosw.searchat.searchatapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.sql.Blob;
+import java.util.List;
 
 public class ProfileInformation{
     
     private String nationality;
-    private ArrayList<String> languages;
+    private List<String> languages;
     private String aboutYou;
     private Blob image;
 
@@ -44,7 +47,7 @@ public class ProfileInformation{
 	/**
 	 * @return the languages
 	 */
-	public ArrayList<String> getLanguages() {
+	public List<String> getLanguages() {
 		return languages;
 	}
 
@@ -72,6 +75,7 @@ public class ProfileInformation{
 	/**
 	 * @return the image
 	 */
+	@JsonIgnore
 	public Blob getImage() {
 		return image;
 	}

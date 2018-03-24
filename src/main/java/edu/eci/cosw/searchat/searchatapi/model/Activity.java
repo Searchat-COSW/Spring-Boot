@@ -14,7 +14,7 @@ public class Activity{
     private String name;
     private String description;
     private User administrator;
-    private ArrayList<String> languages;
+    private List<String> languages;
     private String location;
     private String date;
     private List<User> participants;
@@ -100,7 +100,7 @@ public class Activity{
      * 
      * @return 
      */
-    public ArrayList<String> getLanguages() {
+    public List<String> getLanguages() {
         return languages;
     }
 
