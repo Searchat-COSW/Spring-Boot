@@ -1,5 +1,7 @@
 package edu.eci.cosw.searchat.searchatapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Blob;
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -144,4 +146,7 @@ public class User {
     public void setImageProfileInformation(Blob img){
         this.profileInformation.setImage(img);
     }
+
+    @JsonIgnore
+    public Blob getImageProfileInformation(){return this.profileInformation.getImage();}
 }

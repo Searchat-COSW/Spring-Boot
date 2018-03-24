@@ -7,11 +7,14 @@ import edu.eci.cosw.searchat.searchatapi.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
+import java.sql.SQLException;
 import java.util.Date;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -127,6 +130,23 @@ public class UserController {
 
         return new ResponseEntity<>("{}", HttpStatus.OK);
     
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/{username}/image", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<InputStreamResource> imageProfileInformation(@PathVariable String username) {
+        try {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType("image/png"))
+                    .body(new InputStreamResource(userService.getImageProfileInformation(username)));
+        } catch (ServletException ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        } catch (SQLException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 }
 

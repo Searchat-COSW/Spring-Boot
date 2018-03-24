@@ -4,6 +4,7 @@ package edu.eci.cosw.searchat.searchatapi.service;
 import edu.eci.cosw.searchat.searchatapi.model.ProfileInformation;
 import edu.eci.cosw.searchat.searchatapi.model.User;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,6 +83,15 @@ public class UserServiceImpl  implements UserService
                 throw new ServletException("Information profile can't update");
             }
         }
+    }
+
+    @Override
+    public InputStream getImageProfileInformation(String username) throws SQLException, ServletException {
+        User user = getUser(username);
+        if(user==null){
+            throw new ServletException("Can't get profile image");
+        }
+        return user.getImageProfileInformation().getBinaryStream();
     }
 
 }

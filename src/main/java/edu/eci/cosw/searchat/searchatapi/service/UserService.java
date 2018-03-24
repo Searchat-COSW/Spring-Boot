@@ -4,6 +4,8 @@ import edu.eci.cosw.searchat.searchatapi.model.ProfileInformation;
 import edu.eci.cosw.searchat.searchatapi.model.User;
 
 import javax.servlet.ServletException;
+import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.List;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -43,5 +45,7 @@ public interface UserService {
     boolean updateProfileInformation(String username, ProfileInformation profile)throws ServletException;
     
     void addIMageProfileInformation(MultipartHttpServletRequest request, String username) throws ServletException;
+
+    InputStream getImageProfileInformation(String username) throws SQLException,ServletException;
 
 }
