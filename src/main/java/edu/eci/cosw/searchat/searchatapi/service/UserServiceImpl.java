@@ -22,7 +22,7 @@ import org.springframework.util.StreamUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-@Service
+//@Service
 public class UserServiceImpl  implements UserService
 {
     private List<User> users = new ArrayList<>();

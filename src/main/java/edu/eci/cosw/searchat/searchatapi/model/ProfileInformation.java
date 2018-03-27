@@ -2,11 +2,16 @@ package edu.eci.cosw.searchat.searchatapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.sql.Blob;
 import java.util.List;
 
-public class ProfileInformation{
+
+//@Table(name = "SEARCHAT_PROFILE_INFORMATION")
+//@Entity
+public class ProfileInformation implements java.io.Serializable{
     
     private String nationality;
     private List<String> languages;

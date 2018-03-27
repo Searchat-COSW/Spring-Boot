@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
  * Created by Juan on 21/02/2018
  **/
 
-public class Activity{
+public class Activity implements java.io.Serializable{
 
     private String name;
     private String description;

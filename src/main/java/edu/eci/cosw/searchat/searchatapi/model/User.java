@@ -3,12 +3,17 @@ package edu.eci.cosw.searchat.searchatapi.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Blob;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.sql.rowset.serial.SerialBlob;
 
 /**
  * Created by Desarrollo on 10/02/2018.
  */
-public class User {
+@Table(name = "SEARCHAT_USER")
+@Entity
+public class User implements java.io.Serializable{
 
     private String email;
 
@@ -20,11 +25,13 @@ public class User {
 
     private String username;
 
+
     private ProfileInformation profileInformation;
 
     /**
      *
      */
+
     public User() {
     }
 
@@ -112,6 +119,7 @@ public class User {
      *
      * @return
      */
+    @Id
     public String getUsername() {
         return username;
     }

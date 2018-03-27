@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.cosw.searchat.searchatapi.repositories;
+package edu.eci.cosw.searchat.searchatapi.persistence;
 
 /**
  *
  * @author 2105534
  */
-public class ProfileInformationRepository {
+public interface ProfileInformationRepository {
     
 }
