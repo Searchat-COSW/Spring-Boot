@@ -3,9 +3,7 @@ package edu.eci.cosw.searchat.searchatapi.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Blob;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.sql.rowset.serial.SerialBlob;
 
 /**
@@ -25,7 +23,7 @@ public class User implements java.io.Serializable{
 
     private String username;
 
-
+    @OneToOne @MapsId
     private ProfileInformation profileInformation;
 
     /**
@@ -55,6 +53,7 @@ public class User implements java.io.Serializable{
      *
      * @return
      */
+    @Column(name = "email", nullable = true)
     public String getEmail() {
         return email;
     }
@@ -71,6 +70,7 @@ public class User implements java.io.Serializable{
      *
      * @return
      */
+    @Column(name = "password", nullable = true)
     public String getPassword() {
         return password;
     }
@@ -87,6 +87,7 @@ public class User implements java.io.Serializable{
      *
      * @return
      */
+    @Column(name = "firstname", nullable = true)
     public String getFirstname() {
         return firstname;
     }
@@ -103,6 +104,7 @@ public class User implements java.io.Serializable{
      *
      * @return
      */
+    @Column(name = "lastname", nullable = true)
     public String getLastname() {
         return lastname;
     }
@@ -120,6 +122,7 @@ public class User implements java.io.Serializable{
      * @return
      */
     @Id
+    @Column(name = "username",unique = true, nullable = true)
     public String getUsername() {
         return username;
     }
@@ -140,6 +143,7 @@ public class User implements java.io.Serializable{
     /**
      * @return the profileInformation
      */
+    
     public ProfileInformation getProfileInformation() {
         return profileInformation;
     }
@@ -156,5 +160,5 @@ public class User implements java.io.Serializable{
     }
 
     @JsonIgnore
-    public Blob getImageProfileInformation(){return this.profileInformation.getImage();}
+    public Blob obtainImageProfileInformation(){return this.profileInformation.getImage();}
 }

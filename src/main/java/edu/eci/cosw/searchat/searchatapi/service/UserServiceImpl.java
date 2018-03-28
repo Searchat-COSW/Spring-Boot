@@ -91,7 +91,7 @@ public class UserServiceImpl  implements UserService
         if(user==null){
             throw new ServletException("Can't get profile image");
         }
-        return user.getImageProfileInformation().getBinaryStream();
+        return user.obtainImageProfileInformation().getBinaryStream();
     }
 
 }

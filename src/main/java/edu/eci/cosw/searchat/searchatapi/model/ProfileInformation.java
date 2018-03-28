@@ -7,11 +7,19 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.sql.Blob;
 import java.util.List;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
 
-//@Table(name = "SEARCHAT_PROFILE_INFORMATION")
-//@Entity
+@Table(name = "SEARCHAT_PROFILE_INFORMATION")
+@Entity
 public class ProfileInformation implements java.io.Serializable{
+    
+    private String username;
+    
     
     private String nationality;
     private List<String> languages;
@@ -38,6 +46,7 @@ public class ProfileInformation implements java.io.Serializable{
 	/**
 	 * @return the nationality
 	 */
+        @Column(name = "nationality", nullable = true)
 	public String getNationality() {
 		return nationality;
 	}
@@ -52,6 +61,9 @@ public class ProfileInformation implements java.io.Serializable{
 	/**
 	 * @return the languages
 	 */
+        @ElementCollection
+        @CollectionTable(name="searchat_lenguages", joinColumns=@JoinColumn(name="username"))
+        @Column(name="lenguage")
 	public List<String> getLanguages() {
 		return languages;
 	}
@@ -59,6 +71,7 @@ public class ProfileInformation implements java.io.Serializable{
 	/**
 	 * @param languages the languages to set
 	 */
+        
 	public void setLanguages(ArrayList<String> languages) {
 		this.languages = languages;
 	}
@@ -66,6 +79,7 @@ public class ProfileInformation implements java.io.Serializable{
 	/**
 	 * @return the aboutYou
 	 */
+        @Column(name = "aboutYou", nullable = true)
 	public String getAboutYou() {
 		return aboutYou;
 	}
@@ -81,6 +95,7 @@ public class ProfileInformation implements java.io.Serializable{
 	 * @return the image
 	 */
 	@JsonIgnore
+        @Column(name = "image", nullable = true)
 	public Blob getImage() {
 		return image;
 	}
@@ -91,5 +106,22 @@ public class ProfileInformation implements java.io.Serializable{
 	public void setImage(Blob image) {
 		this.image = image;
 	}
+
+    /**
+     * @return the username
+     */
+    @Id
+    @Column(name = "username",unique = true, nullable = true)
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 
 }
