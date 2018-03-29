@@ -69,10 +69,19 @@ public class UserServicePersistenceImpl implements UserService {
         User u = ur.findOne(username);
         if(u==null){throw new ServletException("Information profile can't update");}
         u.getProfileInformation().setNationality(profile.getNationality());
-        u.getProfileInformation().setLanguages(profile.getLanguages());
         u.getProfileInformation().setAboutYou(profile.getAboutYou());
-        System.out.println("------------------------------GUARDANDO--------------------");
-        System.out.println(u);
+        List<Lenguage> ll=new ArrayList();
+        
+        for (int i=0; i<profile.getLanguages().size();i++) {
+            if(lr.findOne(profile.getLanguages().get(i).getLenguage())!=null){
+                
+                ll.add(lr.findOne(profile.getLanguages().get(i).getLenguage()));
+            }
+            else{
+                ll.add(profile.getLanguages().get(i));
+            }
+        }
+        u.getProfileInformation().setLanguages(ll);
         ur.save(u);
         return true;
     }

@@ -36,9 +36,9 @@ public class ActivityController {
     private UserService userService;
     
     @CrossOrigin
-    @RequestMapping( value = "/{name}", method = RequestMethod.GET )
-    public ResponseEntity<?> getActivity(@PathVariable String name){
-        return new ResponseEntity<>(activityService.getActivity(name), HttpStatus.ACCEPTED);
+    @RequestMapping( value = "/{id}", method = RequestMethod.GET )
+    public ResponseEntity<?> getActivity(@PathVariable int id){
+        return new ResponseEntity<>(activityService.getActivity(id), HttpStatus.ACCEPTED);
     }
     
     @CrossOrigin
@@ -67,10 +67,10 @@ public class ActivityController {
     }
     
     @CrossOrigin
-    @RequestMapping( value = "/join/{activityName}", method = RequestMethod.POST )
-    public ResponseEntity<?> joinActivity(@PathVariable String activityName,@RequestBody String username) {
+    @RequestMapping( value = "/join/{activityId}", method = RequestMethod.POST )
+    public ResponseEntity<?> joinActivity(@PathVariable int activityId,@RequestBody String username) {
         try{
-            return new ResponseEntity<>(activityService.joinActivity(activityName,userService.getUser(username)), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(activityService.joinActivity(activityId,userService.getUser(username)), HttpStatus.ACCEPTED);
         }
         catch (ServletException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);

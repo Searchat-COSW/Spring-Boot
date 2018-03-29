@@ -50,15 +50,15 @@ public class ActivityServiceImpl implements ActivityService{
     }
 
     @Override
-    public Activity getActivity(String activityName) {
-        Optional<Activity> found = activities.stream().filter(h-> h.getName().equals(activityName)).findFirst();
+    public Activity getActivity(int activityId) {
+        Optional<Activity> found = activities.stream().filter(h-> h.getId()==activityId).findFirst();
         Activity ans = found.isPresent()?found.get():null;
         return ans;
     }
 
     @Override
-    public boolean joinActivity(String activityName, User user) throws ServletException {
-        Activity activity_tmp = getActivity(activityName);
+    public boolean joinActivity(int activityId, User user) throws ServletException {
+        Activity activity_tmp = getActivity(activityId);
         if(activity_tmp==null){
             throw new ServletException("Information profile can't update");
         }activity_tmp.joinActivity(user);

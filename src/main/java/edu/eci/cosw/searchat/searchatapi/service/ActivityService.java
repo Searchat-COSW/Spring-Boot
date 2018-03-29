@@ -36,16 +36,16 @@ public interface ActivityService {
      * @param activityName
      * @return 
      */
-    Activity getActivity(String activityName);
+    Activity getActivity(int activityId);
     
     /**
      * 
-     * @param activityName
+     * @param activityId
      * @param user
      * @return
      * @throws ServletException 
      */
-    boolean joinActivity(String activityName, User user)throws ServletException;
+    boolean joinActivity(int activityId, User user)throws ServletException;
     
     List<Activity> getAllActivities();
 }
