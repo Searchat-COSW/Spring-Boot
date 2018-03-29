@@ -28,7 +28,7 @@ public class ProfileInformation implements java.io.Serializable{
     
     
     private String nationality;
-    private List<Lenguage> languages;
+    private List<Lenguage> languages = new ArrayList<>();
     private String aboutYou;
     private Blob image;
 
@@ -51,7 +51,7 @@ public class ProfileInformation implements java.io.Serializable{
     public ProfileInformation(String username,String nationality, ArrayList<Lenguage> languages, String aboutYou){
         this.username = username;
         this.nationality = nationality;
-        this.languages = languages;
+        //this.languages = languages;
         this.aboutYou = aboutYou;
     }
 
@@ -77,7 +77,7 @@ public class ProfileInformation implements java.io.Serializable{
         //CollectionTable(name="searchat_lenguages", joinColumns=@JoinColumn(name="username"))
         //@Column(name="lenguage",nullable = true)
         @ManyToMany(cascade = CascadeType.ALL)
-        @JoinTable(name = "PROFILE_INFORMATIONS_LENGUAGES",          
+        @JoinTable(name = "SEARCHAT_PROFILE_INFORMATIONS_LENGUAGES",          
                 joinColumns =              
                         @JoinColumn(name="PROFILE_username", referencedColumnName="username"),         
                 inverseJoinColumns =              
@@ -91,7 +91,7 @@ public class ProfileInformation implements java.io.Serializable{
 	 * @param languages the languages to set
 	 */
         
-	public void setLanguages(ArrayList<Lenguage> languages) {
+	public void setLanguages(List<Lenguage> languages) {
 		this.languages = languages;
 	}
 

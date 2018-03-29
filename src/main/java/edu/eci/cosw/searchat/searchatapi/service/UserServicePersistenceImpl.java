@@ -36,18 +36,20 @@ public class UserServicePersistenceImpl implements UserService {
 
     @Override
     public boolean createUser(User user) throws ServletException {
-        
+        if (ur.findOne(user.getUsername())!=null){
+            throw new ServletException("Username already taken");
+        }
         ProfileInformation pi = new ProfileInformation(user.getUsername(),null,null,null);
-//        ArrayList<Lenguage> a =new ArrayList<>();
-//        Lenguage l = new Lenguage();
-//        l.setLenguage("Spanish");
-//        lr.save(l);
-//        a.add(l);
-        System.out.println("----------------------------ANTES-------------------");
+        //Lenguage l = new Lenguage();
+        //l.setLenguage("Spanish");
+        //l.getProfileInformations().add(pi);
+        //System.out.println("----------------------------ANTES-------------------");
+        //pi.getLanguages().add(l);
+//        System.out.println("----------------------------ANTES-------------------");
         pir.save(pi);
-        System.out.println("----------------------------DESPUES-------------------");
+//        System.out.println("----------------------------DESPUES-------------------");
         user.setProfileInformation(pi);
-        System.out.println("----------------------------ANTES2-------------------");
+//        System.out.println("----------------------------ANTES2-------------------");
         ur.save(user);
         return true;
     }
