@@ -26,7 +26,7 @@ public class Lenguage {
     
     private String lenguage;
     private List<ProfileInformation> profileInformations = new ArrayList<>();;
-    //private List<Activity> profileInformations;
+    private List<Activity> activities;
 
     public Lenguage(){}
     
@@ -51,7 +51,7 @@ public class Lenguage {
      * @return the profileInformations
      */
     //@Column(name = "profile_information", nullable = true)
-    @ManyToMany(mappedBy="languages",fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy="languages", cascade = CascadeType.ALL)
     @JsonIgnore
     public List<ProfileInformation> getProfileInformations() {
         return profileInformations;
@@ -67,6 +67,22 @@ public class Lenguage {
     @Override
     public String toString() {
         return "Lenguage{" + "lenguage=" + lenguage + ", profileInformations=" + profileInformations + '}';
+    }
+
+    /**
+     * @return the activities
+     */
+    @ManyToMany(mappedBy="languages",fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    /**
+     * @param activities the activities to set
+     */
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
     }
     
 }

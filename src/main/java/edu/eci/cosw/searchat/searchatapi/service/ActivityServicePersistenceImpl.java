@@ -7,35 +7,53 @@ package edu.eci.cosw.searchat.searchatapi.service;
 
 import edu.eci.cosw.searchat.searchatapi.model.Activity;
 import edu.eci.cosw.searchat.searchatapi.model.User;
+import edu.eci.cosw.searchat.searchatapi.persistence.ActivityRepository;
+import edu.eci.cosw.searchat.searchatapi.persistence.UserRepository;
 import java.util.List;
 import javax.servlet.ServletException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  *
  * @author 2105534
  */
-//@Service
+@Service
 public class ActivityServicePersistenceImpl implements ActivityService{
-
+    
+    @Autowired
+    private UserRepository ur;
+    
+    @Autowired
+    private ActivityRepository ar;
+    
     @Override
     public boolean createActivity(Activity activity) throws ServletException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        User admin=ur.findOne(activity.getAdministrator().getUsername());
+        activity.setAdministrator(admin);
+        ar.save(activity);
+        return true;
     }
 
     @Override
     public List<Activity> getActivitiesByLocation(String location) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public Activity getActivity(String activityName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public boolean joinActivity(String activityName, User user) throws ServletException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return true;
+    }
+
+    @Override
+    public List<Activity> getAllActivities() {
+        System.out.println("------------------------------EN TODAS--------------------");
+        return ar.findAll();
     }
     
 }

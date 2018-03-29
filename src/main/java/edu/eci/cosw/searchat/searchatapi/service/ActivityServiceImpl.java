@@ -8,6 +8,7 @@ package edu.eci.cosw.searchat.searchatapi.service;
 import edu.eci.cosw.searchat.searchatapi.model.Activity;
 import edu.eci.cosw.searchat.searchatapi.model.User;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
  *
  * @author JuanHerrera
  */
-@Service
+//@Service
 public class ActivityServiceImpl implements ActivityService{
     
     private List<Activity> activities = new ArrayList<>();
@@ -30,13 +31,13 @@ public class ActivityServiceImpl implements ActivityService{
         List<User> part = new ArrayList<>();
         part.add(new User("Jhordy", "jhordy@hotmail.com", "Jhordy", "Jhordy", "Salinas"));
         activities.add(new Activity("Climbing_Monserrate", "In this activity we'll be going all the way up to Monserrate by foot",u, 
-                null ,"Bogotá","22/02/2018 10:00",part, "40000"));
+                null ,"Bogotá",new Date(65465465),part, "40000"));
     }
 
     @Override
     public boolean createActivity(Activity activity) throws ServletException {
         if (activities.stream().anyMatch(h->h.getName().equals(activity.getName()))){
-            throw new ServletException ("Username already exist");
+            throw new ServletException ("Activity already exist");
         }
         //System.out.println(activity.toString());
         //System.out.println("-------------------------------------FIN------------------------------");
@@ -62,5 +63,10 @@ public class ActivityServiceImpl implements ActivityService{
             throw new ServletException("Information profile can't update");
         }activity_tmp.joinActivity(user);
         return true;
+    }
+
+    @Override
+    public List<Activity> getAllActivities() {
+        return activities;
     }
 }

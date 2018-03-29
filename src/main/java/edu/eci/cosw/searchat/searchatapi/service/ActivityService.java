@@ -46,4 +46,6 @@ public interface ActivityService {
      * @throws ServletException 
      */
     boolean joinActivity(String activityName, User user)throws ServletException;
+    
+    List<Activity> getAllActivities();
 }

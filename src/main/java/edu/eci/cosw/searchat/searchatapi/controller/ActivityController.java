@@ -42,6 +42,12 @@ public class ActivityController {
     }
     
     @CrossOrigin
+    @RequestMapping( value = "/", method = RequestMethod.GET )
+    public ResponseEntity<?> allActivities(){
+        return new ResponseEntity<>(activityService.getAllActivities(), HttpStatus.ACCEPTED);
+    }
+    
+    @CrossOrigin
     @RequestMapping( value = "/location/{location}", method = RequestMethod.GET )
     public ResponseEntity<?> getActivitiesByLocation (@PathVariable String location) {
         return new ResponseEntity<>(activityService.getActivitiesByLocation(location), HttpStatus.ACCEPTED);

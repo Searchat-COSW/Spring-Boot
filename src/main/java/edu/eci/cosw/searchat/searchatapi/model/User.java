@@ -3,6 +3,7 @@ package edu.eci.cosw.searchat.searchatapi.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Blob;
+import java.util.List;
 import javax.persistence.*;
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -25,6 +26,10 @@ public class User implements java.io.Serializable{
 
     
     private ProfileInformation profileInformation;
+    
+    private List<Activity> activities;
+    
+    
 
     /**
      *
@@ -56,6 +61,12 @@ public class User implements java.io.Serializable{
     @Column(name = "email", nullable = true)
     public String getEmail() {
         return email;
+    }
+    
+    @Id
+    @Column(name = "username",unique = true)
+    public String getUsername() {
+        return username;
     }
 
     /**
@@ -121,11 +132,7 @@ public class User implements java.io.Serializable{
      *
      * @return
      */
-    @Id
-    @Column(name = "username",unique = true, nullable = true)
-    public String getUsername() {
-        return username;
-    }
+    
 
     /**
      *
@@ -161,4 +168,22 @@ public class User implements java.io.Serializable{
 
     @JsonIgnore
     public Blob obtainImageProfileInformation(){return this.profileInformation.getImage();}
+
+    /**
+     * @return the activities
+     */
+    
+    
+    @ManyToMany(mappedBy="participants",fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    /**
+     * @param activities the activities to set
+     */
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
+    }
 }
