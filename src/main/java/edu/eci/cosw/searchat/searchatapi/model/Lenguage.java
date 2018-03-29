@@ -5,6 +5,7 @@
  */
 package edu.eci.cosw.searchat.searchatapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -51,6 +52,7 @@ public class Lenguage {
      */
     //@Column(name = "profile_information", nullable = true)
     @ManyToMany(mappedBy="languages",fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
     public List<ProfileInformation> getProfileInformations() {
         return profileInformations;
     }

@@ -68,7 +68,11 @@ public class UserServicePersistenceImpl implements UserService {
     public boolean updateProfileInformation(String username, ProfileInformation profile) throws ServletException {
         User u = ur.findOne(username);
         if(u==null){throw new ServletException("Information profile can't update");}
-        u.setProfileInformation(profile);
+        u.getProfileInformation().setNationality(profile.getNationality());
+        u.getProfileInformation().setLanguages(profile.getLanguages());
+        u.getProfileInformation().setAboutYou(profile.getAboutYou());
+        System.out.println("------------------------------GUARDANDO--------------------");
+        System.out.println(u);
         ur.save(u);
         return true;
     }

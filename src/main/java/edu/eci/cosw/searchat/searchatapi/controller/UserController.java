@@ -112,8 +112,6 @@ public class UserController {
     @RequestMapping( value = "/{username}",method = RequestMethod.POST)
     public ResponseEntity<?> updateProfileInformation(@PathVariable String username, @RequestBody ProfileInformation profile){
         try{
-            System.out.println("------------------------------------------IMPRIMIENDO------------------------------");
-            System.out.println(profile);
             return new ResponseEntity<>(userService.updateProfileInformation(username, profile), HttpStatus.ACCEPTED);
         }catch(ServletException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
