@@ -7,11 +7,17 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.sql.Blob;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 
 @Table(name = "SEARCHAT_PROFILE_INFORMATION")
@@ -22,9 +28,14 @@ public class ProfileInformation implements java.io.Serializable{
     
     
     private String nationality;
-    private List<String> languages;
+    private List<Lenguage> languages;
     private String aboutYou;
     private Blob image;
+
+    @Override
+    public String toString() {
+        return "ProfileInformation{" + "username=" + username + ", nationality=" + nationality + ", languages=" + languages + ", aboutYou=" + aboutYou + ", image=" + image + '}';
+    }
 
     /**
      * 
@@ -37,7 +48,8 @@ public class ProfileInformation implements java.io.Serializable{
      * @param languages
      * @param aboutYou 
      */
-    public ProfileInformation(String nationality, ArrayList<String> languages, String aboutYou){
+    public ProfileInformation(String username,String nationality, ArrayList<Lenguage> languages, String aboutYou){
+        this.username = username;
         this.nationality = nationality;
         this.languages = languages;
         this.aboutYou = aboutYou;
@@ -61,10 +73,17 @@ public class ProfileInformation implements java.io.Serializable{
 	/**
 	 * @return the languages
 	 */
-        @ElementCollection
-        @CollectionTable(name="searchat_lenguages", joinColumns=@JoinColumn(name="username"))
-        @Column(name="lenguage")
-	public List<String> getLanguages() {
+        //@ElementCollection
+        //CollectionTable(name="searchat_lenguages", joinColumns=@JoinColumn(name="username"))
+        //@Column(name="lenguage",nullable = true)
+        @ManyToMany(cascade = CascadeType.ALL)
+        @JoinTable(name = "PROFILE_INFORMATIONS_LENGUAGES",          
+                joinColumns =              
+                        @JoinColumn(name="PROFILE_username", referencedColumnName="username"),         
+                inverseJoinColumns =              
+                        @JoinColumn(name="LENGUAGE_lenguage", referencedColumnName="lenguage")
+        )
+	public List<Lenguage> getLanguages() {
 		return languages;
 	}
 
@@ -72,7 +91,7 @@ public class ProfileInformation implements java.io.Serializable{
 	 * @param languages the languages to set
 	 */
         
-	public void setLanguages(ArrayList<String> languages) {
+	public void setLanguages(ArrayList<Lenguage> languages) {
 		this.languages = languages;
 	}
 

@@ -23,7 +23,7 @@ public class User implements java.io.Serializable{
 
     private String username;
 
-    @OneToOne @MapsId
+    
     private ProfileInformation profileInformation;
 
     /**
@@ -143,7 +143,7 @@ public class User implements java.io.Serializable{
     /**
      * @return the profileInformation
      */
-    
+    @OneToOne @MapsId
     public ProfileInformation getProfileInformation() {
         return profileInformation;
     }

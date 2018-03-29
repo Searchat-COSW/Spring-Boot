@@ -5,14 +5,14 @@
  */
 package edu.eci.cosw.searchat.searchatapi.persistence;
 
+import edu.eci.cosw.searchat.searchatapi.model.Lenguage;
 import edu.eci.cosw.searchat.searchatapi.model.ProfileInformation;
-import edu.eci.cosw.searchat.searchatapi.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
- * @author 2105534
+ * @author carlos.sanchez-v
  */
-public interface ProfileInformationRepository extends JpaRepository<ProfileInformation, String>{
+public interface LenguageRepository extends JpaRepository<Lenguage, String>{
     
 }

@@ -1,7 +1,10 @@
 package edu.eci.cosw.searchat.searchatapi.service;
 
+import edu.eci.cosw.searchat.searchatapi.model.Lenguage;
 import edu.eci.cosw.searchat.searchatapi.model.ProfileInformation;
 import edu.eci.cosw.searchat.searchatapi.model.User;
+import edu.eci.cosw.searchat.searchatapi.persistence.LenguageRepository;
+import edu.eci.cosw.searchat.searchatapi.persistence.ProfileInformationRepository;
 import edu.eci.cosw.searchat.searchatapi.persistence.UserRepository;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.ServletException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import javax.sql.rowset.serial.SerialBlob;
@@ -22,9 +27,27 @@ public class UserServicePersistenceImpl implements UserService {
 
     @Autowired
     private UserRepository ur;
+    
+    @Autowired
+    private ProfileInformationRepository pir;
+    
+    @Autowired
+    private LenguageRepository lr;
 
     @Override
     public boolean createUser(User user) throws ServletException {
+        
+        ProfileInformation pi = new ProfileInformation(user.getUsername(),null,null,null);
+//        ArrayList<Lenguage> a =new ArrayList<>();
+//        Lenguage l = new Lenguage();
+//        l.setLenguage("Spanish");
+//        lr.save(l);
+//        a.add(l);
+        System.out.println("----------------------------ANTES-------------------");
+        pir.save(pi);
+        System.out.println("----------------------------DESPUES-------------------");
+        user.setProfileInformation(pi);
+        System.out.println("----------------------------ANTES2-------------------");
         ur.save(user);
         return true;
     }
