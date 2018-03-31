@@ -20,6 +20,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.servlet.ServletException;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * Created by Juan on 21/02/2018
@@ -145,6 +146,7 @@ public class Activity implements java.io.Serializable{
      * 
      * @return 
      */
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @Column(name = "date", nullable = true)
     public Date getDate() {
         return date;
