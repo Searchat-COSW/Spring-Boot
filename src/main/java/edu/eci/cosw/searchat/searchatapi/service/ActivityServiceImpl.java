@@ -7,6 +7,9 @@ package edu.eci.cosw.searchat.searchatapi.service;
 
 import edu.eci.cosw.searchat.searchatapi.model.Activity;
 import edu.eci.cosw.searchat.searchatapi.model.User;
+
+import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +17,8 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import java.util.stream.Collectors;
 
 /**
@@ -31,17 +36,18 @@ public class ActivityServiceImpl implements ActivityService{
         List<User> part = new ArrayList<>();
         part.add(new User("Jhordy", "jhordy@hotmail.com", "Jhordy", "Jhordy", "Salinas"));
         activities.add(new Activity("Climbing_Monserrate", "In this activity we'll be going all the way up to Monserrate by foot",u, 
-                null ,"Bogotá",new Date(65465465),part, "40000"));
+                null ,"Bogotá",new Date(65465465),part, new Long(40000)));
     }
 
     @Override
-    public boolean createActivity(Activity activity) throws ServletException {
+    public Activity createActivity(Activity activity) throws ServletException {
         if (activities.stream().anyMatch(h->h.getName().equals(activity.getName()))){
             throw new ServletException ("Activity already exist");
         }
         //System.out.println(activity.toString());
         //System.out.println("-------------------------------------FIN------------------------------");
-        return activities.add(activity);
+        activities.add(activity);
+        return activity;
     }
 
     @Override
@@ -68,5 +74,15 @@ public class ActivityServiceImpl implements ActivityService{
     @Override
     public List<Activity> getAllActivities() {
         return activities;
+    }
+
+    @Override
+    public void addIMageActivity(MultipartHttpServletRequest request, int activityId) throws ServletException {
+
+    }
+
+    @Override
+    public InputStream getImageActivity(int activityId) throws SQLException, ServletException {
+        return null;
     }
 }

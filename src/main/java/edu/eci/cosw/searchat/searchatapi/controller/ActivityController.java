@@ -12,14 +12,14 @@ import edu.eci.cosw.searchat.searchatapi.service.UserService;
 import javax.servlet.ServletException;
 import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import java.sql.SQLException;
 
 /**
  *
@@ -75,6 +75,38 @@ public class ActivityController {
         catch (ServletException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
         }
+    }
+
+
+    @CrossOrigin
+    @RequestMapping( value = "/{activityId}/image",method = RequestMethod.POST)
+    public ResponseEntity<?> updateImageProfileInformation(MultipartHttpServletRequest request, @PathVariable int activityId){
+        try {
+
+            activityService.addIMageActivity(request,activityId);
+        } catch (Exception e) {
+            return new ResponseEntity<>("{}", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>("{}", HttpStatus.OK);
+
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/{activityId}/image", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<InputStreamResource> imageProfileInformation(@PathVariable int activityId) {
+        try {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType("image/png"))
+                    .body(new InputStreamResource(activityService.getImageActivity(activityId)));
+        } catch (ServletException ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        } catch (SQLException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
     
 }

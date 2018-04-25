@@ -1,5 +1,6 @@
 package edu.eci.cosw.searchat.searchatapi.model;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -21,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.servlet.ServletException;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Created by Juan on 21/02/2018
@@ -37,7 +39,8 @@ public class Activity implements java.io.Serializable{
     private String location;
     private Date date;
     private List<User> participants;
-    private String price;
+    private Long price;
+    private Blob image;
 
     /**
      * 
@@ -56,7 +59,7 @@ public class Activity implements java.io.Serializable{
      * @param participants
      * @param price 
      */
-    public Activity(String name, String description, User administrator, ArrayList<Lenguage> languages, String location, Date date, List<User> participants, String price) {
+    public Activity(String name, String description, User administrator, ArrayList<Lenguage> languages, String location, Date date, List<User> participants, Long price) {
         this.name = name;
         this.description = description;
         this.administrator = administrator;
@@ -65,6 +68,19 @@ public class Activity implements java.io.Serializable{
         this.date = date;
         this.participants = participants;
         this.price = price;
+    }
+
+    public Activity(int id, String name, String description, User administrator, List<Lenguage> lenguages, String location, Date date, List<User> participants, Long price, Blob image) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.administrator = administrator;
+        this.lenguages = lenguages;
+        this.location = location;
+        this.date = date;
+        this.participants = participants;
+        this.price = price;
+        this.image = image;
     }
 
     /**
@@ -191,7 +207,7 @@ public class Activity implements java.io.Serializable{
      * @return 
      */
     @Column(name = "price", nullable = true)
-    public String getPrice() {
+    public Long getPrice() {
         return price;
     }
 
@@ -199,7 +215,7 @@ public class Activity implements java.io.Serializable{
      * 
      * @param price 
      */
-    public void setPrice(String price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
@@ -259,6 +275,20 @@ public class Activity implements java.io.Serializable{
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+
+    @JsonIgnore
+    @Column(name = "image", nullable = true)
+    public Blob getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(Blob image) {
+        this.image = image;
     }
 
     

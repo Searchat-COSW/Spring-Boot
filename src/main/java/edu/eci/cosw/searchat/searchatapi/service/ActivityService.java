@@ -7,6 +7,10 @@ package edu.eci.cosw.searchat.searchatapi.service;
 
 import edu.eci.cosw.searchat.searchatapi.model.Activity;
 import edu.eci.cosw.searchat.searchatapi.model.User;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.ServletException;
 
@@ -22,7 +26,7 @@ public interface ActivityService {
      * @return
      * @throws ServletException 
      */
-    boolean createActivity(Activity activity) throws ServletException;
+    Activity createActivity(Activity activity) throws ServletException;
 
     /**
      * 
@@ -33,7 +37,7 @@ public interface ActivityService {
 
     /**
      * 
-     * @param activityName
+     * @param activityId
      * @return 
      */
     Activity getActivity(int activityId);
@@ -48,4 +52,8 @@ public interface ActivityService {
     boolean joinActivity(int activityId, User user)throws ServletException;
     
     List<Activity> getAllActivities();
+
+    void addIMageActivity(MultipartHttpServletRequest request, int activityId) throws ServletException;
+
+    InputStream getImageActivity(int activityId) throws SQLException,ServletException;
 }
