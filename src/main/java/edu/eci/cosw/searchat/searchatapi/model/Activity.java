@@ -41,6 +41,9 @@ public class Activity implements java.io.Serializable{
     private List<User> participants;
     private Long price;
     private Blob image;
+    private Long longitude;
+    private Long latitude;
+
 
     /**
      * 
@@ -81,6 +84,21 @@ public class Activity implements java.io.Serializable{
         this.participants = participants;
         this.price = price;
         this.image = image;
+    }
+
+    public Activity(int id, String name, String description, User administrator, List<Lenguage> lenguages, String location, Date date, List<User> participants, Long price, Blob image, Long longitude, Long latitude) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.administrator = administrator;
+        this.lenguages = lenguages;
+        this.location = location;
+        this.date = date;
+        this.participants = participants;
+        this.price = price;
+        this.image = image;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     /**
@@ -261,6 +279,7 @@ public class Activity implements java.io.Serializable{
         }
     }
 
+
     /**
      * @return the id
      */
@@ -291,5 +310,22 @@ public class Activity implements java.io.Serializable{
         this.image = image;
     }
 
-    
+
+    @Column(name = "longitude", nullable = true)
+    public Long getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Long longitude) {
+        this.longitude = longitude;
+    }
+
+    @Column(name = "latitude", nullable = true)
+    public Long getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Long latitude) {
+        this.latitude = latitude;
+    }
 }
