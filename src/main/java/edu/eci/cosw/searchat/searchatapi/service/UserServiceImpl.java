@@ -94,4 +94,15 @@ public class UserServiceImpl  implements UserService
         return user.obtainImageProfileInformation().getBinaryStream();
     }
 
+    @Override
+    public boolean updateUser(String username, User profile) throws ServletException {
+        User user = getUser(username);
+        if(user==null){
+            throw new ServletException("Can't get profile image");
+        }user.setProfileInformation(profile.getProfileInformation());
+        user.setFirstname(profile.getFirstname());
+        user.setLastname(profile.getLastname());
+        return true;
+    }
+
 }

@@ -118,4 +118,32 @@ public class UserServicePersistenceImpl implements UserService {
         }
         return user.obtainImageProfileInformation().getBinaryStream();
     }
+
+    @Override
+    public boolean updateUser(String username, User profile) throws ServletException {
+        User user = ur.getOne(username);
+        if(user==null){
+            throw new ServletException("Can't get update user");
+        }user.getProfileInformation().setAboutYou(profile.getProfileInformation().getAboutYou());
+        user.getProfileInformation().setImage(profile.getProfileInformation().getImage());
+        user.getProfileInformation().setNationality(profile.getProfileInformation().getNationality());
+        user.setFirstname(profile.getFirstname());
+        user.setLastname(profile.getLastname());
+        //setting lenguages
+        List<Lenguage> ll=new ArrayList();
+        
+        for (int i=0; i<profile.getProfileInformation().getLanguages().size();i++) {
+            if(lr.findOne(profile.getProfileInformation().getLanguages().get(i).getLenguage())!=null){
+                
+                ll.add(lr.findOne(profile.getProfileInformation().getLanguages().get(i).getLenguage()));
+            }
+            else{
+                ll.add(profile.getProfileInformation().getLanguages().get(i));
+            }
+        }
+        user.getProfileInformation().setLanguages(ll);
+        
+        ur.save(user);
+        return true;
+    }
 }

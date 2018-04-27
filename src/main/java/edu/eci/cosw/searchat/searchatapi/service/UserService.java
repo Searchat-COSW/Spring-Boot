@@ -47,5 +47,7 @@ public interface UserService {
     void addIMageProfileInformation(MultipartHttpServletRequest request, String username) throws ServletException;
 
     InputStream getImageProfileInformation(String username) throws SQLException,ServletException;
+    
+    boolean updateUser(String username, User profile) throws ServletException;
 
 }

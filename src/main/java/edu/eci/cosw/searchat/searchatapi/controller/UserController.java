@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
  */
 
 @RestController
-@RequestMapping( "user" )
+    @RequestMapping( "user" )
 public class UserController {
     @Autowired
     private UserService userService;
@@ -94,6 +94,8 @@ public class UserController {
     @CrossOrigin
     @RequestMapping( value = "/{username}", method = RequestMethod.GET )
     public ResponseEntity<?> getUser (@PathVariable String username) {
+        System.out.println("---------------------------");
+        System.out.println(username);
         return new ResponseEntity<>(userService.getUser(username),HttpStatus.ACCEPTED);
     }
     
@@ -119,6 +121,19 @@ public class UserController {
     }
     
     @CrossOrigin
+    @RequestMapping( value = "/update/{username}",method = RequestMethod.POST)
+    public ResponseEntity<?> updateUser(@PathVariable String username, @RequestBody User profile){
+        try{
+            System.out.println("----------------");
+            System.out.println(profile.toString());
+            System.out.println(profile.getProfileInformation().toString());
+            return new ResponseEntity<>(userService.updateUser(username, profile), HttpStatus.ACCEPTED);
+        }catch(ServletException e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
+        }
+    }
+    
+    @CrossOrigin
     @RequestMapping( value = "/{username}/image",method = RequestMethod.POST)
     public ResponseEntity<?> updateImageProfileInformation(MultipartHttpServletRequest request,@PathVariable String username){
         try {
@@ -136,6 +151,8 @@ public class UserController {
     @RequestMapping(value = "/{username}/image", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<InputStreamResource> imageProfileInformation(@PathVariable String username) {
+        
+        System.out.println("-------------------------------TEST---------------------------");
         try {
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType("image/png"))
