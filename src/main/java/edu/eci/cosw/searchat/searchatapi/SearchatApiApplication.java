@@ -16,7 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories ("edu.eci.cosw.searchat.searchatapi.persistence")
-@EntityScan("edu.eci.cosw.searchat.searchatapi..model")
+@EntityScan("edu.eci.cosw.searchat.searchatapi.model")
 public class SearchatApiApplication {
 
 
