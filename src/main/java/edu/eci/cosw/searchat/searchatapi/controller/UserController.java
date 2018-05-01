@@ -157,10 +157,7 @@ public class UserController {
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType("image/png"))
                     .body(new InputStreamResource(userService.getImageProfileInformation(username)));
-        } catch (ServletException ex) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-
-        } catch (SQLException e) {
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
