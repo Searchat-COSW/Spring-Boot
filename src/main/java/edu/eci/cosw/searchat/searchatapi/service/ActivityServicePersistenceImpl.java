@@ -118,4 +118,14 @@ public class ActivityServicePersistenceImpl implements ActivityService{
         return a.getImage().getBinaryStream();
     }
 
+    @Override
+    public List<Activity> getOwnedActivities(String username) throws ServletException {
+        return ar.getActivitiesOwnedByUsername(username);
+    }
+
+    @Override
+    public List<Activity> getJoinedActivities(String username) throws ServletException {
+        return ar.getActivitiesJoinedByUsername(username);
+    }
+
 }

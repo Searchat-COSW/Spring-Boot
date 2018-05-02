@@ -109,4 +109,23 @@ public class ActivityController {
 
     }
     
+    @CrossOrigin
+    @RequestMapping( value = "/owned/{username}", method = RequestMethod.GET )
+    public ResponseEntity<?> getOwnActivities(@PathVariable String username){
+        try{
+            return new ResponseEntity<>(activityService.getOwnedActivities(username), HttpStatus.ACCEPTED);
+        }catch(ServletException ex){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @CrossOrigin
+    @RequestMapping( value = "/joined/{username}", method = RequestMethod.GET )
+    public ResponseEntity<?> getJoinActivities(@PathVariable String username){
+        try{
+            return new ResponseEntity<>(activityService.getJoinedActivities(username), HttpStatus.ACCEPTED);
+        }catch(ServletException ex){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

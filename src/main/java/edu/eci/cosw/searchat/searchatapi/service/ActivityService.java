@@ -51,9 +51,42 @@ public interface ActivityService {
      */
     boolean joinActivity(int activityId, User user)throws ServletException;
     
+    /**
+     * 
+     * @return 
+     */
     List<Activity> getAllActivities();
 
+    /**
+     * 
+     * @param request
+     * @param activityId
+     * @throws ServletException 
+     */
     void addIMageActivity(MultipartHttpServletRequest request, int activityId) throws ServletException;
 
+    /**
+     * 
+     * @param activityId
+     * @return
+     * @throws SQLException
+     * @throws ServletException 
+     */
     InputStream getImageActivity(int activityId) throws SQLException,ServletException;
+
+    /**
+     * 
+     * @param username
+     * @return
+     * @throws ServletException 
+     */
+    List<Activity> getOwnedActivities(String username)throws ServletException;
+    
+    /**
+     * 
+     * @param username
+     * @return
+     * @throws ServletException 
+     */
+    List<Activity> getJoinedActivities(String username)throws ServletException;
 }

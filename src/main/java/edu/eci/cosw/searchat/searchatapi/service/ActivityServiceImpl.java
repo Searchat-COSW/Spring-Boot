@@ -85,4 +85,14 @@ public class ActivityServiceImpl implements ActivityService{
     public InputStream getImageActivity(int activityId) throws SQLException, ServletException {
         return null;
     }
+
+    @Override
+    public List<Activity> getOwnedActivities(String username) throws ServletException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Activity> getJoinedActivities(String username) throws ServletException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -23,6 +23,6 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer>{
     @Query("SELECT a from Activity a where a.administrator.username=?1")
     List<Activity> getActivitiesOwnedByUsername(String username);
 
-    /*@Query("SELECT a from Activity a  inner join User u where u") //missing a good query
-    public List<Activity> getActivitiesJoinedByUsername(String username);*/
+    @Query("SELECT a from Activity a inner join a.participants as u where u.username=?1") 
+    public List<Activity> getActivitiesJoinedByUsername(String username);
 }
