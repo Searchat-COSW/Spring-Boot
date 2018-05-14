@@ -35,8 +35,8 @@ public class ActivityServiceImpl implements ActivityService{
         User u = new User("Juan", "juan.c.herrerav@hotmail.com", "Juan", "Juan", "Herrera");
         List<User> part = new ArrayList<>();
         part.add(new User("Jhordy", "jhordy@hotmail.com", "Jhordy", "Jhordy", "Salinas"));
-        activities.add(new Activity("Climbing_Monserrate", "In this activity we'll be going all the way up to Monserrate by foot",u, 
-                null ,"Bogotá",new Date(65465465),part, new Long(40000)));
+        /*activities.add(new Activity("Climbing_Monserrate", "In this activity we'll be going all the way up to Monserrate by foot",u,
+                null ,"Bogotá",new Date(65465465),part, new Long(40000)));*/
     }
 
     @Override

@@ -1,6 +1,7 @@
 package edu.eci.cosw.searchat.searchatapi.model;
 
 import java.sql.Blob;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -23,6 +24,9 @@ import javax.persistence.Table;
 import javax.servlet.ServletException;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 /**
  * Created by Juan on 21/02/2018
@@ -37,7 +41,7 @@ public class Activity implements java.io.Serializable{
     private User administrator;
     private List<Lenguage> lenguages;
     private String location;
-    private Date date;
+    private String date;
     private List<User> participants;
     private Long price;
     private Blob image;
@@ -62,7 +66,7 @@ public class Activity implements java.io.Serializable{
      * @param participants
      * @param price 
      */
-    public Activity(String name, String description, User administrator, ArrayList<Lenguage> languages, String location, Date date, List<User> participants, Long price) {
+    public Activity(String name, String description, User administrator, ArrayList<Lenguage> languages, String location, String date, List<User> participants, Long price) {
         this.name = name;
         this.description = description;
         this.administrator = administrator;
@@ -73,7 +77,7 @@ public class Activity implements java.io.Serializable{
         this.price = price;
     }
 
-    public Activity(int id, String name, String description, User administrator, List<Lenguage> lenguages, String location, Date date, List<User> participants, Long price, Blob image) {
+    public Activity(int id, String name, String description, User administrator, List<Lenguage> lenguages, String location, String date, List<User> participants, Long price, Blob image) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -86,7 +90,7 @@ public class Activity implements java.io.Serializable{
         this.image = image;
     }
 
-    public Activity(int id, String name, String description, User administrator, List<Lenguage> lenguages, String location, Date date, List<User> participants, Long price, Blob image, Double longitude, Double latitude) {
+    public Activity(int id, String name, String description, User administrator, List<Lenguage> lenguages, String location, String date, List<User> participants, Long price, Blob image, Double longitude, Double latitude) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -163,7 +167,7 @@ public class Activity implements java.io.Serializable{
                 inverseJoinColumns =              
                         @JoinColumn(name="LENGUAGE_lenguage", referencedColumnName="lenguage")
         )
-    public List<Lenguage> getLanguages() {
+    public List<Lenguage> getLenguages() {
         return lenguages;
     }
 
@@ -172,7 +176,7 @@ public class Activity implements java.io.Serializable{
      * @param languages 
      */
     
-    public void setLanguages(List<Lenguage> languages) {
+    public void setLenguages(List<Lenguage> languages) {
         this.lenguages = languages;
     }
 
@@ -180,9 +184,9 @@ public class Activity implements java.io.Serializable{
      * 
      * @return 
      */
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+
     @Column(name = "date", nullable = true)
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -190,7 +194,7 @@ public class Activity implements java.io.Serializable{
      * 
      * @param date 
      */
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -254,10 +258,6 @@ public class Activity implements java.io.Serializable{
         this.location = location;
     }
 
-    @Override
-    public String toString() {
-        return "Activity{" + "name=" + name + ", description=" + description + ", administrator=" + administrator + ", languages=" + lenguages + ", location=" + location + ", date=" + date + ", participants=" + participants + ", price=" + price + '}';
-    }
     
     /**
      * 
@@ -327,5 +327,24 @@ public class Activity implements java.io.Serializable{
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", administrator=" + administrator +
+                ", lenguages=" + lenguages +
+                ", location='" + location + '\'' +
+                ", date='" + date + '\'' +
+                ", participants=" + participants +
+                ", price=" + price +
+                ", image=" + image +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                '}';
     }
 }

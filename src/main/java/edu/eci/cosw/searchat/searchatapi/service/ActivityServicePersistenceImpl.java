@@ -48,16 +48,16 @@ public class ActivityServicePersistenceImpl implements ActivityService{
         User admin=ur.findOne(activity.getAdministrator().getUsername());
         List<Lenguage> ll=new ArrayList();
         
-        for (int i=0; i<activity.getLanguages().size();i++) {
-            if(lr.findOne(activity.getLanguages().get(i).getLenguage())!=null){
+        for (int i=0; i<activity.getLenguages().size();i++) {
+            if(lr.findOne(activity.getLenguages().get(i).getLenguage())!=null){
                 
-                ll.add(lr.findOne(activity.getLanguages().get(i).getLenguage()));
+                ll.add(lr.findOne(activity.getLenguages().get(i).getLenguage()));
             }
             else{
-                ll.add(activity.getLanguages().get(i));
+                ll.add(activity.getLenguages().get(i));
             }
         }
-        activity.setLanguages(ll);
+        activity.setLenguages(ll);
         activity.setAdministrator(admin);
         ar.save(activity);
         return activity; //problems with ID of the activity, maybe solving with the last activity created by the user

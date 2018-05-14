@@ -72,7 +72,7 @@ public class Lenguage {
     /**
      * @return the activities
      */
-    @ManyToMany(mappedBy="languages",fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy="lenguages",fetch= FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     public List<Activity> getActivities() {
         return activities;
