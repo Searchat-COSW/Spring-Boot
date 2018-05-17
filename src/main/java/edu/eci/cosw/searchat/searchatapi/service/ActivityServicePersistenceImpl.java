@@ -78,6 +78,7 @@ public class ActivityServicePersistenceImpl implements ActivityService{
     public boolean joinActivity(int activityId, User user) throws ServletException {
         Activity ja=ar.findOne(activityId);
         ja.getParticipants().add(user);
+        System.out.println("Name activity "+ja.getName());
         ar.save(ja);
         return true;
     }

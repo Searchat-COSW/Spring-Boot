@@ -56,9 +56,8 @@ public class ActivityController {
     @CrossOrigin
     @RequestMapping( value = "/create", method = RequestMethod.POST )
     public ResponseEntity<?> createActivity (@RequestBody Activity activity) {
-        
         try{
-            System.out.println("-------------------------------------creando actividad------------------------------");
+            
             System.out.println(activity);
             return new ResponseEntity<>(activityService.createActivity(activity), HttpStatus.ACCEPTED);
         }
@@ -71,6 +70,8 @@ public class ActivityController {
     @RequestMapping( value = "/join/{activityId}", method = RequestMethod.POST )
     public ResponseEntity<?> joinActivity(@PathVariable int activityId,@RequestBody String username) {
         try{
+            System.out.println("Activity ID "+activityId);
+            System.out.println("Username ->"+username);
             return new ResponseEntity<>(activityService.joinActivity(activityId,userService.getUser(username)), HttpStatus.ACCEPTED);
         }
         catch (ServletException e){
@@ -83,7 +84,7 @@ public class ActivityController {
     @RequestMapping( value = "/{activityId}/image",method = RequestMethod.POST)
     public ResponseEntity<?> updateImageProfileInformation(MultipartHttpServletRequest request, @PathVariable int activityId){
         try {
-
+            
             activityService.addIMageActivity(request,activityId);
         } catch (Exception e) {
             return new ResponseEntity<>("{}", HttpStatus.INTERNAL_SERVER_ERROR);
