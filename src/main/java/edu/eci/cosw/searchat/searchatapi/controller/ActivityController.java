@@ -70,9 +70,9 @@ public class ActivityController {
     @RequestMapping( value = "/join/{activityId}", method = RequestMethod.POST )
     public ResponseEntity<?> joinActivity(@PathVariable int activityId,@RequestBody String username) {
         try{
-            System.out.println("Activity ID "+activityId);
-            System.out.println("Username ->"+username);
-            return new ResponseEntity<>(activityService.joinActivity(activityId,userService.getUser(username)), HttpStatus.ACCEPTED);
+            String newUSer = username.replace(""+'"', "");
+            System.out.println("New Username ->"+newUSer);
+            return new ResponseEntity<>(activityService.joinActivity(activityId,userService.getUser(newUSer)), HttpStatus.ACCEPTED);
         }
         catch (ServletException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
