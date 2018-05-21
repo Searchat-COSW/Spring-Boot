@@ -71,7 +71,6 @@ public class ActivityController {
     public ResponseEntity<?> joinActivity(@PathVariable int activityId,@RequestBody String username) {
         try{
             String newUSer = username.replace(""+'"', "");
-            System.out.println("New Username ->"+newUSer);
             return new ResponseEntity<>(activityService.joinActivity(activityId,userService.getUser(newUSer)), HttpStatus.ACCEPTED);
         }
         catch (ServletException e){
